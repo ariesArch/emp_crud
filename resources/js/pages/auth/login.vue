@@ -11,7 +11,7 @@
 						<v-card-text>
 							<validation-provider v-slot="{errors}" rules="required" name="staffId">
 								<v-text-field
-									v-model="model.id"
+									v-model="model.staff_id"
 									required
 									:error-messages="errors"
 									label="staffId"
@@ -48,7 +48,7 @@
 	export default {
 		data: () => ({
 			model: {
-				id: "",
+				staff_id: "",
 				password: "",
 			},
 			showForm: true,
@@ -98,11 +98,12 @@
 						localforage.setItem("user", user);
 						this.loadingData = true;
 						successMessage = "Welcome to CodeTest Dashboard!";
+						setTimeout(() => {
+							this.loadingData = false;
+							this.$router.push({ name: "dashboard" });
+						}, 2000);
 					}
-					setTimeout(() => {
-						this.loadingData = false;
-						this.$router.push({ name: "dashboard" });
-					}, 2000);
+
 					this.handleStatus({
 						status,
 						message,

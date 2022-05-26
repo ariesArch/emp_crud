@@ -43,7 +43,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $loginData = $request->validate([
-            'id' => 'required',
+            'staff_id' => 'required',
             'password' => 'required'
         ]);
         if (!Auth::guard('employee-web')->attempt($loginData)) {

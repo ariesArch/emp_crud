@@ -1,5 +1,7 @@
 <template>
 	<v-app-bar app flat dense>
+		<h4 class="primary--text">{{user?user.role.name:''}}</h4>
+
 		<v-spacer />
 		<v-btn icon @click="handleFullScreen()">
 			<v-icon>fullscreen</v-icon>

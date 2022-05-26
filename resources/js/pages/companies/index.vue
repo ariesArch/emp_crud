@@ -95,13 +95,18 @@
 					if (newVal === oldVal) {
 						return;
 					}
-					setTimeout(() => {
-						this.paginationDataTable(
-							this,
-							`${this.$api.COMPANY_URL}`,
-							this.companyOptions
-						);
-					}, 500);
+					this.paginationDataTable(
+						this,
+						`${this.$api.COMPANY_URL}`,
+						this.companyOptions
+					);
+					// setTimeout(() => {
+					// 	this.paginationDataTable(
+					// 		this,
+					// 		`${this.$api.COMPANY_URL}`,
+					// 		this.companyOptions
+					// 	);
+					// }, 500);
 				},
 				deep: true,
 			},

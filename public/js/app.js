@@ -2113,6 +2113,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AppToolbar",
@@ -3474,7 +3476,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       model: {
-        id: "",
+        staff_id: "",
         password: ""
       },
       showForm: true,
@@ -3556,15 +3558,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   localforage__WEBPACK_IMPORTED_MODULE_1___default.a.setItem("user", user);
                   _this2.loadingData = true;
                   successMessage = "Welcome to CodeTest Dashboard!";
+                  setTimeout(function () {
+                    _this2.loadingData = false;
+
+                    _this2.$router.push({
+                      name: "dashboard"
+                    });
+                  }, 2000);
                 }
-
-                setTimeout(function () {
-                  _this2.loadingData = false;
-
-                  _this2.$router.push({
-                    name: "dashboard"
-                  });
-                }, 2000);
 
                 _this2.handleStatus({
                   status: status,
@@ -3573,11 +3574,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   successMessage: successMessage
                 });
 
-                _context.next = 25;
+                _context.next = 24;
                 break;
 
-              case 21:
-                _context.prev = 21;
+              case 20:
+                _context.prev = 20;
                 _context.t0 = _context["catch"](0);
                 console.log("error" + _context.t0.message);
 
@@ -3586,16 +3587,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   that: _this2
                 });
 
-              case 25:
+              case 24:
                 _this2.disabledButton = false;
                 _this2.isLoading = false;
 
-              case 27:
+              case 26:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 21]]);
+        }, _callee, null, [[0, 20]]);
       }))();
     }
   })
@@ -3729,15 +3730,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   watch: {
     "companyOptions.page": {
       handler: function handler(newVal, oldVal) {
-        var _this3 = this;
-
         if (newVal === oldVal) {
           return;
         }
 
-        setTimeout(function () {
-          _this3.paginationDataTable(_this3, "".concat(_this3.$api.COMPANY_URL), _this3.companyOptions);
-        }, 500);
+        this.paginationDataTable(this, "".concat(this.$api.COMPANY_URL), this.companyOptions); // setTimeout(() => {
+        // 	this.paginationDataTable(
+        // 		this,
+        // 		`${this.$api.COMPANY_URL}`,
+        // 		this.companyOptions
+        // 	);
+        // }, 500);
       },
       deep: true
     }
@@ -3747,40 +3750,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.paginationDataTable(this, "".concat(this.$api.COMPANY_URL), this.companyOptions);
     },
     getDataFromApi: function getDataFromApi(url) {
-      var _this4 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _yield$_this4$$reques, data, status, message, meta;
+        var _yield$_this3$$reques, data, status, message, meta;
 
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _this4.loadingData = true;
+                _this3.loadingData = true;
                 _context.next = 4;
-                return _this4.$request.getData(url, _this4.jwt);
+                return _this3.$request.getData(url, _this3.jwt);
 
               case 4:
-                _yield$_this4$$reques = _context.sent;
-                data = _yield$_this4$$reques.data;
-                status = _yield$_this4$$reques.status;
-                message = _yield$_this4$$reques.message;
-                meta = _yield$_this4$$reques.meta;
+                _yield$_this3$$reques = _context.sent;
+                data = _yield$_this3$$reques.data;
+                status = _yield$_this3$$reques.status;
+                message = _yield$_this3$$reques.message;
+                meta = _yield$_this3$$reques.meta;
 
                 if (status === 1) {
                   setTimeout(function () {
-                    _this4.companies = data;
+                    _this3.companies = data;
 
-                    _this4.setPaginationData(_this4, meta, _this4.companyOptions);
+                    _this3.setPaginationData(_this3, meta, _this3.companyOptions);
                   }, 100);
                 } else {
-                  _this4.loadingData = false;
+                  _this3.loadingData = false;
 
-                  _this4.handleStatus({
+                  _this3.handleStatus({
                     status: status,
                     message: message,
-                    that: _this4
+                    that: _this3
                   });
                 }
 
@@ -3791,13 +3794,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context.prev = 12;
                 _context.t0 = _context["catch"](0);
 
-                _this4.handleException({
+                _this3.handleException({
                   error: _context.t0,
-                  that: _this4
+                  that: _this3
                 });
 
               case 15:
-                _this4.loadingData = false;
+                _this3.loadingData = false;
 
               case 16:
               case "end":
@@ -3808,10 +3811,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }))();
     },
     fetchData: function fetchData() {
-      var _this5 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _yield$_this5$$reques, status, message, data;
+        var _yield$_this4$$reques, status, message, data;
 
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
@@ -3819,21 +3822,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return _this5.$request.getData(_this5.$api.COMPANY_URL, _this5.jwt);
+                return _this4.$request.getData(_this4.$api.COMPANY_URL, _this4.jwt);
 
               case 3:
-                _yield$_this5$$reques = _context2.sent;
-                status = _yield$_this5$$reques.status;
-                message = _yield$_this5$$reques.message;
-                data = _yield$_this5$$reques.data;
+                _yield$_this4$$reques = _context2.sent;
+                status = _yield$_this4$$reques.status;
+                message = _yield$_this4$$reques.message;
+                data = _yield$_this4$$reques.data;
 
                 if (status === 1) {
-                  _this5.companies = data;
+                  _this4.companies = data;
                 } else {
-                  _this5.handleStatus({
+                  _this4.handleStatus({
                     status: status,
                     message: message,
-                    that: _this5,
+                    that: _this4,
                     successMessage: ""
                   });
                 }
@@ -3845,9 +3848,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context2.prev = 10;
                 _context2.t0 = _context2["catch"](0);
 
-                _this5.handleException({
+                _this4.handleException({
                   error: _context2.t0,
-                  that: _this5
+                  that: _this4
                 });
 
               case 13:
@@ -4220,15 +4223,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   watch: {
     "departmentOptions.page": {
       handler: function handler(newVal, oldVal) {
-        var _this3 = this;
-
         if (newVal === oldVal) {
           return;
         }
 
-        setTimeout(function () {
-          _this3.paginationDataTable(_this3, "".concat(_this3.$api.DEPARTMENT_URL), _this3.departmentOptions);
-        }, 500);
+        this.paginationDataTable(this, "".concat(this.$api.DEPARTMENT_URL), this.departmentOptions); // setTimeout(() => {
+        // 	this.paginationDataTable(
+        // 		this,
+        // 		`${this.$api.DEPARTMENT_URL}`,
+        // 		this.departmentOptions
+        // 	);
+        // }, 500);
       },
       deep: true
     }
@@ -4238,40 +4243,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.paginationDataTable(this, "".concat(this.$api.DEPARTMENT_URL), this.departmentOptions);
     },
     getDataFromApi: function getDataFromApi(url) {
-      var _this4 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _yield$_this4$$reques, data, status, message, meta;
+        var _yield$_this3$$reques, data, status, message, meta;
 
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _this4.loadingData = true;
+                _this3.loadingData = true;
                 _context.next = 4;
-                return _this4.$request.getData(url, _this4.jwt);
+                return _this3.$request.getData(url, _this3.jwt);
 
               case 4:
-                _yield$_this4$$reques = _context.sent;
-                data = _yield$_this4$$reques.data;
-                status = _yield$_this4$$reques.status;
-                message = _yield$_this4$$reques.message;
-                meta = _yield$_this4$$reques.meta;
+                _yield$_this3$$reques = _context.sent;
+                data = _yield$_this3$$reques.data;
+                status = _yield$_this3$$reques.status;
+                message = _yield$_this3$$reques.message;
+                meta = _yield$_this3$$reques.meta;
 
                 if (status === 1) {
                   setTimeout(function () {
-                    _this4.departments = data;
+                    _this3.departments = data;
 
-                    _this4.setPaginationData(_this4, meta, _this4.departmentOptions);
+                    _this3.setPaginationData(_this3, meta, _this3.departmentOptions);
                   }, 100);
                 } else {
-                  _this4.loadingData = false;
+                  _this3.loadingData = false;
 
-                  _this4.handleStatus({
+                  _this3.handleStatus({
                     status: status,
                     message: message,
-                    that: _this4
+                    that: _this3
                   });
                 }
 
@@ -4282,13 +4287,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context.prev = 12;
                 _context.t0 = _context["catch"](0);
 
-                _this4.handleException({
+                _this3.handleException({
                   error: _context.t0,
-                  that: _this4
+                  that: _this3
                 });
 
               case 15:
-                _this4.loadingData = false;
+                _this3.loadingData = false;
 
               case 16:
               case "end":
@@ -4299,10 +4304,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }))();
     },
     fetchData: function fetchData() {
-      var _this5 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _yield$_this5$$reques, status, message, data;
+        var _yield$_this4$$reques, status, message, data;
 
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
@@ -4310,21 +4315,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return _this5.$request.getData(_this5.$api.DEPARTMENT_URL, _this5.jwt);
+                return _this4.$request.getData(_this4.$api.DEPARTMENT_URL, _this4.jwt);
 
               case 3:
-                _yield$_this5$$reques = _context2.sent;
-                status = _yield$_this5$$reques.status;
-                message = _yield$_this5$$reques.message;
-                data = _yield$_this5$$reques.data;
+                _yield$_this4$$reques = _context2.sent;
+                status = _yield$_this4$$reques.status;
+                message = _yield$_this4$$reques.message;
+                data = _yield$_this4$$reques.data;
 
                 if (status === 1) {
-                  _this5.departments = data;
+                  _this4.departments = data;
                 } else {
-                  _this5.handleStatus({
+                  _this4.handleStatus({
                     status: status,
                     message: message,
-                    that: _this5,
+                    that: _this4,
                     successMessage: ""
                   });
                 }
@@ -4336,9 +4341,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context2.prev = 10;
                 _context2.t0 = _context2["catch"](0);
 
-                _this5.handleException({
+                _this4.handleException({
                   error: _context2.t0,
-                  that: _this5
+                  that: _this4
                 });
 
               case 13:
@@ -4575,24 +4580,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   watch: {
     "employeeOptions.page": {
       handler: function handler(newVal, oldVal) {
-        var _this3 = this;
-
         if (newVal === oldVal) {
           return;
         }
 
-        setTimeout(function () {
-          _this3.paginationDataTable(_this3, "".concat(_this3.$api.EMPLOYEE_URL), _this3.employeeOptions);
-        }, 500);
+        this.paginationDataTable(this, "".concat(this.$api.EMPLOYEE_URL), this.employeeOptions); // setTimeout(() => {
+        // 	this.paginationDataTable(
+        // 		this,
+        // 		`${this.$api.EMPLOYEE_URL}`,
+        // 		this.employeeOptions
+        // 	);
+        // }, 500);
       },
       deep: true
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this3 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var _yield$_this4$$reques, status, message, data;
+      var _yield$_this3$$reques, status, message, data;
 
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
@@ -4600,23 +4607,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return _this4.$request.getData(_this4.$api.MASTER_RECORD_URL, _this4.jwt);
+              return _this3.$request.getData(_this3.$api.MASTER_RECORD_URL, _this3.jwt);
 
             case 3:
-              _yield$_this4$$reques = _context.sent;
-              status = _yield$_this4$$reques.status;
-              message = _yield$_this4$$reques.message;
-              data = _yield$_this4$$reques.data;
+              _yield$_this3$$reques = _context.sent;
+              status = _yield$_this3$$reques.status;
+              message = _yield$_this3$$reques.message;
+              data = _yield$_this3$$reques.data;
 
               if (status === 1) {
-                _this4.companies = data.companies;
-                _this4.departments = data.departments;
-                _this4.roles = data.roles;
+                _this3.companies = data.companies;
+                _this3.departments = data.departments;
+                _this3.roles = data.roles;
               } else {
-                _this4.handleStatus({
+                _this3.handleStatus({
                   status: status,
                   message: message,
-                  that: _this4,
+                  that: _this3,
                   successMessage: ""
                 });
               }
@@ -4628,9 +4635,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               _context.prev = 10;
               _context.t0 = _context["catch"](0);
 
-              _this4.handleException({
+              _this3.handleException({
                 error: _context.t0,
-                that: _this4
+                that: _this3
               });
 
             case 13:
@@ -4646,40 +4653,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.paginationDataTable(this, "".concat(this.$api.EMPLOYEE_URL), this.employeeOptions);
     },
     getDataFromApi: function getDataFromApi(url) {
-      var _this5 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _yield$_this5$$reques, data, status, message, meta;
+        var _yield$_this4$$reques, data, status, message, meta;
 
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                _this5.loadingData = true;
+                _this4.loadingData = true;
                 _context2.next = 4;
-                return _this5.$request.getData(url, _this5.jwt);
+                return _this4.$request.getData(url, _this4.jwt);
 
               case 4:
-                _yield$_this5$$reques = _context2.sent;
-                data = _yield$_this5$$reques.data;
-                status = _yield$_this5$$reques.status;
-                message = _yield$_this5$$reques.message;
-                meta = _yield$_this5$$reques.meta;
+                _yield$_this4$$reques = _context2.sent;
+                data = _yield$_this4$$reques.data;
+                status = _yield$_this4$$reques.status;
+                message = _yield$_this4$$reques.message;
+                meta = _yield$_this4$$reques.meta;
 
                 if (status === 1) {
                   setTimeout(function () {
-                    _this5.employees = data;
+                    _this4.employees = data;
 
-                    _this5.setPaginationData(_this5, meta, _this5.employeeOptions);
+                    _this4.setPaginationData(_this4, meta, _this4.employeeOptions);
                   }, 100);
                 } else {
-                  _this5.loadingData = false;
+                  _this4.loadingData = false;
 
-                  _this5.handleStatus({
+                  _this4.handleStatus({
                     status: status,
                     message: message,
-                    that: _this5
+                    that: _this4
                   });
                 }
 
@@ -4690,13 +4697,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context2.prev = 12;
                 _context2.t0 = _context2["catch"](0);
 
-                _this5.handleException({
+                _this4.handleException({
                   error: _context2.t0,
-                  that: _this5
+                  that: _this4
                 });
 
               case 15:
-                _this5.loadingData = false;
+                _this4.loadingData = false;
 
               case 16:
               case "end":
@@ -4707,10 +4714,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }))();
     },
     fetchData: function fetchData() {
-      var _this6 = this;
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var _yield$_this6$$reques, status, message, data;
+        var _yield$_this5$$reques, status, message, data;
 
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
@@ -4718,21 +4725,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return _this6.$request.getData(_this6.$api.EMPLOYEE_URL, _this6.jwt);
+                return _this5.$request.getData(_this5.$api.EMPLOYEE_URL, _this5.jwt);
 
               case 3:
-                _yield$_this6$$reques = _context3.sent;
-                status = _yield$_this6$$reques.status;
-                message = _yield$_this6$$reques.message;
-                data = _yield$_this6$$reques.data;
+                _yield$_this5$$reques = _context3.sent;
+                status = _yield$_this5$$reques.status;
+                message = _yield$_this5$$reques.message;
+                data = _yield$_this5$$reques.data;
 
                 if (status === 1) {
-                  _this6.employees = data;
+                  _this5.employees = data;
                 } else {
-                  _this6.handleStatus({
+                  _this5.handleStatus({
                     status: status,
                     message: message,
-                    that: _this6,
+                    that: _this5,
                     successMessage: ""
                   });
                 }
@@ -4744,9 +4751,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context3.prev = 10;
                 _context3.t0 = _context3["catch"](0);
 
-                _this6.handleException({
+                _this5.handleException({
                   error: _context3.t0,
-                  that: _this6
+                  that: _this5
                 });
 
               case 13:
@@ -12189,6 +12196,10 @@ var render = function () {
     "v-app-bar",
     { attrs: { app: "", flat: "", dense: "" } },
     [
+      _c("h4", { staticClass: "primary--text" }, [
+        _vm._v(_vm._s(_vm.user ? _vm.user.role.name : "")),
+      ]),
+      _vm._v(" "),
       _c("v-spacer"),
       _vm._v(" "),
       _c(
@@ -13724,11 +13735,15 @@ var render = function () {
                                               type: "number",
                                             },
                                             model: {
-                                              value: _vm.model.id,
+                                              value: _vm.model.staff_id,
                                               callback: function ($$v) {
-                                                _vm.$set(_vm.model, "id", $$v)
+                                                _vm.$set(
+                                                  _vm.model,
+                                                  "staff_id",
+                                                  $$v
+                                                )
                                               },
-                                              expression: "model.id",
+                                              expression: "model.staff_id",
                                             },
                                           }),
                                         ]
@@ -13737,7 +13752,7 @@ var render = function () {
                                   ],
                                   null,
                                   false,
-                                  4052274812
+                                  2417023557
                                 ),
                               }),
                               _vm._v(" "),

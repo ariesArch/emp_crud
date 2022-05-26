@@ -147,13 +147,18 @@
 					if (newVal === oldVal) {
 						return;
 					}
-					setTimeout(() => {
-						this.paginationDataTable(
-							this,
-							`${this.$api.EMPLOYEE_URL}`,
-							this.employeeOptions
-						);
-					}, 500);
+					this.paginationDataTable(
+						this,
+						`${this.$api.EMPLOYEE_URL}`,
+						this.employeeOptions
+					);
+					// setTimeout(() => {
+					// 	this.paginationDataTable(
+					// 		this,
+					// 		`${this.$api.EMPLOYEE_URL}`,
+					// 		this.employeeOptions
+					// 	);
+					// }, 500);
 				},
 				deep: true,
 			},

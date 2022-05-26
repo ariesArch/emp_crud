@@ -15,7 +15,7 @@ class Employee extends Authenticatable
 
     public function findForPassport($staff_id)
     {
-        return $this->where('username', $staff_id)->first();
+        return $this->where('staff_id', $staff_id)->first();
     }
 
     protected $fillable = [
@@ -32,18 +32,15 @@ class Employee extends Authenticatable
     public function scopeFilter($query, $filter)
     {
         if (isset($filter['search']) && $search = $filter['search']) {
-            // Ecact Keyword
+            // Exact word for each
             // $names = explode(" ", $search);
             // $query->where(function ($query) use ($names) {
             //     $query->whereIn('first_name', $names)
             //         ->orWhereIn('last_name', $names);
             // });
-            $query->where(function ($query) use ($search) {
-                $query->where('first_name', 'ILIKE', "%{$search}%");
-                $query->orWhere(function ($query) use ($search) {
-                    $query->where('last_name', 'ILIKE', "%{$search}%");
-                });
-            });
+            $query->where('first_name', 'like', "%$search%")
+                ->orWhereRaw("concat(first_name, ' ', last_name) like '%$search%' ")
+                ->orWhere('last_name', 'like', "$search");
         }
         if (isset($filter['company_id']) && $company_id = $filter['company_id']) {
             $query->where('company_id', $company_id);

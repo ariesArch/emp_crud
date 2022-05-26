@@ -95,13 +95,18 @@
 					if (newVal === oldVal) {
 						return;
 					}
-					setTimeout(() => {
-						this.paginationDataTable(
-							this,
-							`${this.$api.DEPARTMENT_URL}`,
-							this.departmentOptions
-						);
-					}, 500);
+					this.paginationDataTable(
+						this,
+						`${this.$api.DEPARTMENT_URL}`,
+						this.departmentOptions
+					);
+					// setTimeout(() => {
+					// 	this.paginationDataTable(
+					// 		this,
+					// 		`${this.$api.DEPARTMENT_URL}`,
+					// 		this.departmentOptions
+					// 	);
+					// }, 500);
 				},
 				deep: true,
 			},
