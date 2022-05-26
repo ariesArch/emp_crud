@@ -12,6 +12,7 @@ A Mix of Laravel+Vue+Vueitfy
 
 - composer install 
 - link to database by .env 
+- php artisan passport:install
 - php artisan migrate --seed to insert prepared data
 - php artisan serve (or) use virtualhost 
 
